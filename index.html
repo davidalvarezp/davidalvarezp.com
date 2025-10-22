@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>davidalvarezp</title>
+  <meta name="description" content="davidalvarezp: Administrador de sistemas, especialista en ciberseguridad y desarrollador. Ofrece soluciones digitales, optimización de servidores y diseño/diseño web profesional.">
+  <link rel="canonical" href="https://davidalvarezp.com/">
+  <link rel="stylesheet" href="private/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Open Graph / Social Media -->    
+  <meta property="og:title" content="David Álvarez – SysAdmin & Dev & InfoSec">
+  <meta property="og:description" content="Soluciones digitales, optimización de servidores y desarrollo web profesional.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://davidalvarezp.com/">
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <!-- Botones de control -->
+  <div class="control-buttons">
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <span class="theme-icon">☀️</span>
+    </button>
+    <button class="language-toggle" id="languageToggle" aria-label="Cambiar idioma">
+      <span class="language-icon">🇪🇦</span>
+    </button>
+  </div>
+
+  <main class="card">
+    <div class="card-content">
+      <div class="header">
+        <h1>davidalvarezp</h1>
+        <h2 class="description" data-es="SysAdmin | Dev | CyberSec" data-en="SysAdmin | Dev | CyberSec">SysAdmin | Dev | CyberSec</h2>
+      </div>
+
+      <a href="mailto:contact@davidalvarezp.com" class="cta-button">
+        <span data-es="Contactar" data-en="Contact">Contactar</span>
+      </a>
+
+      <div class="links-container">
+        <a href="https://linkedin.com/in/davidalvarezp" target="_blank" class="link-item">
+          <div class="link-icon linkedin">in</div>
+          <div class="link-text">
+            <h3>LinkedIn</h3>
+            <p data-es="Conecta profesionalmente" data-en="Professional network">Conecta profesionalmente</p>
+          </div>
+          <div class="link-arrow">↗</div>
+        </a>
+
+        <a href="https://dev.davidalvarezp.com" target="_blank" class="link-item">
+          <div class="link-icon devbydap">
+            <img src="private/devbydap.png" alt="devbydap" class="icon-image">
+          </div>
+          <div class="link-text">
+            <h3>devbydap</h3>
+            <p data-es="Blog de desarrollo" data-en="Development blog">Blog de desarrollo</p>
+          </div>
+          <div class="link-arrow">↗</div>
+        </a>
+      </div>
+
+      <div class="footer">
+        <p class="copyright">© 2020 - <span id="currentYear"></span> davidalvarezp</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script para el año actual -->
+  <script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Cargar scripts desde directorio privado -->
+  <script src="private/theme.js"></script>
+  <script src="private/background.js"></script>
+  <script src="private/language.js"></script>
+</body>
+</html>
