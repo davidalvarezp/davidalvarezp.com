@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 Forbidden - davidalvarezp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #000;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        canvas#bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .error-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            background: rgba(15, 15, 15, 0.9);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            max-width: 500px;
+            margin: 2rem;
+        }
+
+        .error-code {
+            font-size: 6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .home-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .credit {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .credit a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .error-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg"></canvas>
+    
+    <div class="error-content">
+        <div class="error-code">403</div>
+        <h1 class="error-title">Access Forbidden</h1>
+        <p class="error-message">
+            You don't have permission to access this resource.<br>
+            The file or directory is protected for security reasons.
+        </p>
+        <a href="/" class="home-button">Return to Homepage</a>
+        
+        <div class="credit">
+            <a href="https://davidalvarezp.com">davidalvarezp</a> • SysAdmin | Dev | CyberSec
+        </div>
+    </div>
+
+    <script>
+        // Fondo animado (versión simplificada del background.js)
+        const canvas = document.getElementById("bg");
+        const ctx = canvas.getContext("2d");
+
+        let w, h;
+        let dots = [];
+
+        function resizeCanvas() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            dots = [];
+            
+            const dotCount = window.innerWidth < 768 ? 60 : 100;
+            
+            for (let i = 0; i < dotCount; i++) {
+                dots.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 1.5 + 0.5
+                });
+            }
+        }
+
+        function connectDots() {
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+            ctx.lineWidth = 0.3;
+            
+            for (let a = 0; a < dots.length; a++) {
+                for (let b = a + 1; b < dots.length; b++) {
+                    const dx = dots[a].x - dots[b].x;
+                    const dy = dots[a].y - dots[b].y;
+                    const dist = dx * dx + dy * dy;
+                    
+                    if (dist < 10000) {
+                        ctx.beginPath();
+                        ctx.moveTo(dots[a].x, dots[a].y);
+                        ctx.lineTo(dots[b].x, dots[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function drawDots() {
+            ctx.clearRect(0, 0, w, h);
+            
+            // Dibujar puntos
+            ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+            for (const dot of dots) {
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Movimiento
+                dot.x += dot.vx;
+                dot.y += dot.vy;
+
+                // Rebote en bordes
+                if (dot.x < 0 || dot.x > w) dot.vx *= -1;
+                if (dot.y < 0 || dot.y > h) dot.vy *= -1;
+            }
+
+            connectDots();
+            requestAnimationFrame(drawDots);
+        }
+
+        // Inicialización
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+        drawDots();
+    </script>
+</body>
+</html>
